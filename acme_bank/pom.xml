@@ -1,0 +1,178 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <version>1.0</version>
+  <build>
+  
+    <finalName>acme_bank</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+		
+				<annotationProcessorPaths>
+					<path>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok-edge</artifactId>
+						<version>UNRELEASED</version>
+					</path>
+				</annotationProcessorPaths>
+			</configuration>
+      </plugin>
+      
+   
+      
+    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            
+            <configuration>
+            
+    		 
+    		 <filters>
+		        <filter>
+		            <artifact>*:*</artifact>
+		            <excludes>
+		                <exclude>META-INF/*.SF</exclude>
+		                <exclude>META-INF/*.DSA</exclude>
+		                <exclude>META-INF/*.RSA</exclude>
+		            </excludes>
+		        </filter>
+		          
+		        <filter>
+		        	<artifact>ch.qos.logback:*</artifact>
+		        	<includes>
+		        		<include>**</include>
+		        	</includes>
+		        </filter>
+		        
+		        <filter>
+		        	<artifact>org.slf4j:*</artifact>
+		        	<includes>
+		        		<include>**</include>
+		        	</includes>
+		        </filter>
+		      	<filter>
+		        	<artifact>org.eclipse.jetty:jetty-util</artifact>
+		        	<includes>
+		        		<include>**</include>
+		        	</includes>
+		        </filter>
+		        <filter>
+		        	<artifact>org.apache.commons:*</artifact>
+		        	<includes>
+		        		<include>**</include>
+		        	</includes>
+		        </filter>
+		    </filters>
+		    
+		    
+    		 
+    		 <transformers>
+           	   <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>com.auraya.DemoMain</mainClass>
+               </transformer>
+    		 </transformers>
+    		 
+             <minimizeJar>false</minimizeJar>
+              
+             
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+     
+    
+    </plugins>
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.eclipse.jetty</groupId>
+  		<artifactId>jetty-server</artifactId>
+  		<version>9.4.6.v20170531</version>
+  	</dependency>
+  	<dependency>
+  		 <groupId>org.projectlombok</groupId>
+         <artifactId>lombok-edge</artifactId>
+         <version>UNRELEASED</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-lang3</artifactId>
+  		<version>3.6</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>commons-io</groupId>
+  		<artifactId>commons-io</artifactId>
+  		<version>2.5</version>
+  	</dependency>
+ 	<dependency>
+  		<groupId>commons-beanutils</groupId>
+  		<artifactId>commons-beanutils</artifactId>
+  		<version>1.9.3</version>
+  	</dependency>
+    <dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-configuration2</artifactId>
+  		<version>2.1</version>
+  	</dependency>
+    <dependency>
+  		<groupId>ch.qos.logback</groupId>
+  		<artifactId>logback-classic</artifactId>
+  		<version>1.1.7</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.codehaus.janino</groupId>
+  		<artifactId>janino</artifactId>
+  		<version>3.0.6</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.slf4j</groupId>
+  		<artifactId>jcl-over-slf4j</artifactId>
+  		<version>1.7.22</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.httpcomponents</groupId>
+  		<artifactId>httpmime</artifactId>
+  		<version>4.3.6</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-text</artifactId>
+  		<version>1.1</version>
+  	</dependency>
+  	<dependency>
+	  <groupId>com.google.cloud</groupId>
+	  <artifactId>google-cloud-speech</artifactId>
+	  <version>0.32.0-alpha</version>
+	</dependency>
+  	<dependency>
+  		<groupId>com.machinezoo.noexception</groupId>
+  		<artifactId>noexception</artifactId>
+  		<version>1.2.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-math3</artifactId>
+  		<version>3.6.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.fasterxml.jackson.core</groupId>
+  		<artifactId>jackson-databind</artifactId>
+  		<version>2.9.4</version>
+  	</dependency>
+  </dependencies>
+  <groupId>com.aurayasystems</groupId>
+  <artifactId>acme_bank</artifactId>
+</project>

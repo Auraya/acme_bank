@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="10 seconds">
+
+  <jmxConfigurator />
+  
+  
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    
+   
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>DEBUG</level>
+    </filter>
+   
+    
+    <filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
+      <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+        <expression>
+			 if (logger.startsWith("org.apache.http")) {
+			 	return level &lt; INFO;
+			 }
+			 
+			 if (logger.startsWith("org.apache.commons.beanutils")) {
+			 	return level &lt; WARN;
+			 }
+			 
+			 if (logger.startsWith("org.eclipse.jetty")) {
+			 	return level &lt; INFO;
+			 }	 
+			 
+			 return false;
+		</expression>
+      </evaluator>
+      <OnMismatch>NEUTRAL</OnMismatch>
+      <OnMatch>DENY</OnMatch>
+    </filter>
+    
+    
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>logs/%d{yyyy/MM, aux}/demo.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+      <!-- keep 30 days' worth of history capped at 3GB total size -->
+      <maxHistory>100</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+
+    </rollingPolicy>
+
+
+    <encoder>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-17thread %-5level %mdc{sessionId} %logger{35}.%method: %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+  
+  	 <filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
+      <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+        <expression>
+			 if (logger.startsWith("demo.main")) {
+			 	return level >= INFO;
+			 }
+			
+			 
+			 return false;
+		</expression>
+      </evaluator>
+      <OnMismatch>DENY</OnMismatch>
+      <OnMatch>ACCEPT</OnMatch>
+    </filter>
+    
+  
+  	<encoder>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS}: %msg%ex{0}%n</pattern>
+    </encoder>
+  </appender>
+  
+
+  <root level="DEBUG">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>

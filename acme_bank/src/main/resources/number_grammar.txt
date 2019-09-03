@@ -1,0 +1,12 @@
+$digit = oh | zero | one | two | three | four | five | six | seven | eight | nine;
+$digits1 = $digit;
+$digits2 = $digit $digits1 |  double $digit;
+$digits3 = $digit $digits2 |  double $digit $digits1 | triple $digit;
+$digits4 = $digit $digits3 |  double $digit $digits2 | triple $digit $digits1;
+$digits5 = $digit $digits4 |  double $digit $digits3 | triple $digit $digits2;
+$digits6 = $digit $digits5 |  double $digit $digits4 | triple $digit $digits3;
+$digits7 = $digit $digits6 |  double $digit $digits5 | triple $digit $digits4;
+$digits8 = $digit $digits7 |  double $digit $digits6 | triple $digit $digits5;
+$digits9 = $digit $digits8 |  double $digit $digits7 | triple $digit $digits6;
+$digits10= $digit $digits9 |  double $digit $digits8 | triple $digit $digits7;
+$digits11= $digit $digits10|  double $digit $digits9 | triple $digit $digits8
