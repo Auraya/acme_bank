@@ -27,6 +27,7 @@ import com.auraya.grammar.ABNFCompiler;
 import com.auraya.grammar.AbstractGrammar;
 import com.auraya.grammar.Node;
 import com.auraya.grammar.Node.NodeType;
+import com.auraya.proxy.IProxyClient;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -169,7 +170,7 @@ public abstract class State {
 		private ABNFCompiler compiler = new ABNFCompiler();
 		
 		ArmorVox armorvox = null;
-		ProxyClient proxy = null;
+		IProxyClient proxy = null;
 		OutputStream outputStream;
 		State currentState = null;
 		private List<Prompt> prompts = new ArrayList<>();
@@ -183,7 +184,7 @@ public abstract class State {
 		
 		Configuration config;
 		
-		public Context(State state, ArmorVox armorvox, ProxyClient proxy, Configuration config, Map<String,String> appMap) {
+		public Context(State state, ArmorVox armorvox, IProxyClient proxy, Configuration config, Map<String,String> appMap) {
 			this.currentState = state;
 			this.armorvox = armorvox;
 			this.proxy = proxy;
@@ -209,7 +210,7 @@ public abstract class State {
 			return armorvox;
 		}
 		
-		public ProxyClient getProxy() {
+		public IProxyClient getProxy() {
 			return proxy;
 		}
 		

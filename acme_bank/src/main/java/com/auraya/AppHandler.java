@@ -1,6 +1,7 @@
 package com.auraya;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import org.slf4j.MDC;
 import com.auraya.api.ArmorVox;
 import com.auraya.api.ArmorVox6;
 import com.auraya.api.ArmorVox8;
+import com.auraya.proxy.DefaultProxyClient;
+import com.auraya.proxy.IProxyClient;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +34,12 @@ public class AppHandler  extends AbstractHandler {
 
 	Configuration config;
 	ArmorVox armorvox;
-	private ProxyClient proxy;
+	private IProxyClient proxy;
 	
+	@SneakyThrows
 	public AppHandler(Configuration config) {
 		this.config = config;
 		String uri = config.getString("armorvox.uri", "http://localhost:9006/v6/");
-		//String group = config.getString("armorvox.licence", "auraya-ivr");
 		String channel = config.getString("armorvox.channel", "ivr");
 		
 		if (config.getBoolean("api8")) {
@@ -45,9 +48,11 @@ public class AppHandler  extends AbstractHandler {
 			this.armorvox = new ArmorVox6(uri, channel);
 		}
 		
-
-		String proxyURI = config.getString("proxy.uri", "https://cloud.armorvox.com/id_manager/");
-		this.proxy = new ProxyClient(proxyURI);
+		String className = config.getString("proxy.class", DefaultProxyClient.class.getName());
+		Class<? extends IProxyClient> clazz =  Class.forName(className).asSubclass(IProxyClient.class);;
+		Constructor<? extends IProxyClient> ctor = clazz.getConstructor();
+		this.proxy = ctor.newInstance();
+		this.proxy.init(config);
 	}
 	
 	
