@@ -71,7 +71,7 @@ public class AppHandler  extends AbstractHandler {
 		if (StringUtils.startsWith(request.getContentType(), "multipart/form-data")) {
 			int maxFileLength = 20000000;
 			MultipartConfigElement multipartConfigElement = new MultipartConfigElement("tmp", maxFileLength, maxFileLength, maxFileLength);
-			request.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
+			request.setAttribute(Request.MULTIPART_CONFIG_ELEMENT, multipartConfigElement);
 			
 			for (Part part : request.getParts()) {
 				if (part.getName().endsWith("recording")) {
