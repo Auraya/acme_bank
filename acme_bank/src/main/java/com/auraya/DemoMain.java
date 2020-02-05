@@ -62,10 +62,8 @@ public class DemoMain {
 
        SessionHandler sessions = new SessionHandler();
        
-
-       
-       
        ContextHandler demoHandler = new ContextHandler(config.getString("http.context","/demo1"));
+      
       // demoHandler.getServletContext().setAttribute("app_map", new HashMap<String,String>());
        demoHandler.setHandler(sessions);
        

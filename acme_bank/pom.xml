@@ -15,8 +15,8 @@
 				<annotationProcessorPaths>
 					<path>
 						<groupId>org.projectlombok</groupId>
-						<artifactId>lombok-edge</artifactId>
-						<version>UNRELEASED</version>
+						<artifactId>lombok</artifactId>
+						<version>1.18.2</version>
 					</path>
 				</annotationProcessorPaths>
 			</configuration>
@@ -100,13 +100,7 @@
   		<groupId>org.eclipse.jetty</groupId>
   		<artifactId>jetty-server</artifactId>
   		<version>9.4.20.v20190813</version>
-  	</dependency>
-  	<dependency>
-  		 <groupId>org.projectlombok</groupId>
-         <artifactId>lombok-edge</artifactId>
-         <version>UNRELEASED</version>
-  		<scope>provided</scope>
-  	</dependency>
+  	</dependency> 
   	<dependency>
   		<groupId>org.apache.commons</groupId>
   		<artifactId>commons-lang3</artifactId>
@@ -171,6 +165,11 @@
   		<groupId>com.fasterxml.jackson.core</groupId>
   		<artifactId>jackson-databind</artifactId>
   		<version>2.9.10.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.projectlombok</groupId>
+  		<artifactId>lombok</artifactId>
+  		<version>1.18.2</version>
   	</dependency>
   </dependencies>
   <groupId>com.aurayasystems</groupId>
